@@ -7,11 +7,11 @@ public class ElectionResult {
     double per_gop;
     double diff;
     double per_point_diff;
-    double state_abbr;
-    double county_name;
+    String state_abbr;
+    String county_name;
     double combined_fips;
 
-    public ElectionResult(double votes_dem , double votes_gop, double total_votes, double per_dem, double per_gop, double diff, double per_point_diff, double state_abbr, double county_name, double combined_fips){
+    public ElectionResult(double votes_dem , double votes_gop, double total_votes, double per_dem, double per_gop, double diff, double per_point_diff, String state_abbr, String county_name, double combined_fips){
         this.votes_dem = votes_dem;
         this.votes_gop = votes_gop;
         this.total_votes = total_votes;
@@ -81,19 +81,19 @@ public class ElectionResult {
         this.per_point_diff = per_point_diff;
     }
 
-    public double getState_abbr() {
+    public String getState_abbr() {
         return state_abbr;
     }
 
-    public void setState_abbr(double state_abbr) {
+    public void setState_abbr(String state_abbr) {
         this.state_abbr = state_abbr;
     }
 
-    public double getCounty_name() {
+    public String getCounty_name() {
         return county_name;
     }
 
-    public void setCounty_name(double county_name) {
+    public void setCounty_name(String county_name) {
         this.county_name = county_name;
     }
 
