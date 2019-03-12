@@ -27,39 +27,48 @@ public class Utils {
         ArrayList<ElectionResult> results = new ArrayList<>();
 
         String[] individualLines = data.split("\n");
+
+
         for (int i = 1; i < individualLines.length; i++) { // skips first  line which is the labels of each column
             for (int index = 0; index < individualLines[i].length(); index++) {
-                if(individualLines[i].substring(index,index+1).equals(",")){ // gets rid of the first number and the comma
-                    if(index < 6){
-                        individualLines[i].replace(individualLines[i].substring(0,index+1),"");
+                if (individualLines[i].substring(index, index + 1).equals(",")) { // gets rid of the first number and the comma
+                    if (index < 5) {
+                        String s = individualLines[i].replace(individualLines[i].substring(0, index + 1), "");
+                        individualLines[i] = s;
                     }
                 }
-                if(individualLines[i].substring(index,index+1).equals("%")){ // gets rid of %
-                    individualLines[i].replace(individualLines[i].substring(index,index+1),"");
+                if (individualLines[i].substring(index, index + 1).equals("%")) { // gets rid of %
+                    String q = individualLines[i].replace(individualLines[i].substring(index, index + 1), "");
+                    individualLines[i] = q;
                 }
-                if(quoteNum == 0) { // gets rid of comma inside quotes and then both of the quotes
                     if (individualLines[i].substring(index, index + 1).equals(quote.substring(1, 2))) {
-                        int secondQuote = findSecondQuote(individualLines[i].substring(index));
-                        for (int j = index; j < secondQuote; j++) {
+                        int secondQuote = findSecondQuote(individualLines[i], index);
+                        System.out.println(secondQuote);
+                        for (int j = index; j < secondQuote + 1; j++) {
                             if (individualLines[i].substring(j, j + 1).equals(",")) {
-                                individualLines[i].replace(individualLines[i].substring(j, j + 1), "");
+                                String w = individualLines[i].replace(individualLines[i].substring(j, j + 1), "");
+                                individualLines[i] = w;
                             }
                         }
-                        individualLines[i].replace(individualLines[i].substring(index, index + 1), "");
-                        individualLines[i].replace(individualLines[i].substring(secondQuote, secondQuote + 1), "");
-                        quoteNum++;
+                        String x = individualLines[i].replace(individualLines[i].substring(index, index + 1), "");
+                        individualLines[i] = x;
+                        String jeff = individualLines[i].replace(individualLines[i].substring(secondQuote, secondQuote + 1), "");
+                        individualLines[i] = jeff;
                     }
-                }
-
             }
+
+
         }
+
 
 
         for (int lineNum = 0; lineNum < individualLines.length; lineNum++) { //splits and creates new ElectionResult obj, then adds it to arraylist
             String[] noSymbolLine = individualLines[lineNum].split(",");
-            ElectionResult result = new ElectionResult(Integer.parseInt(noSymbolLine[0]),Integer.parseInt(noSymbolLine[1]),Integer.parseInt(noSymbolLine[2]),Integer.parseInt(noSymbolLine[3]),
-                    Integer.parseInt(noSymbolLine[4]),Integer.parseInt(noSymbolLine[5]),Integer.parseInt(noSymbolLine[6])
-                    ,noSymbolLine[7],noSymbolLine[8],Integer.parseInt(noSymbolLine[9]));
+
+            ElectionResult result = new ElectionResult(Double.parseDouble(noSymbolLine[0]),Double.parseDouble(noSymbolLine[1]),
+                    Double.parseDouble(noSymbolLine[2]),Double.parseDouble(noSymbolLine[3]),
+                    Double.parseDouble(noSymbolLine[4]),Double.parseDouble(noSymbolLine[5]),Double.parseDouble(noSymbolLine[6])
+                    ,noSymbolLine[7],noSymbolLine[8],Double.parseDouble(noSymbolLine[9]));
 
             results.add(result);
         }
@@ -69,9 +78,9 @@ public class Utils {
     }
 
 
-    private static int findSecondQuote(String s) {
+    private static int findSecondQuote(String s, int start) {
         String quote = " \"\" ";
-        for (int i = 1; i < s.length() ; i++) {
+        for (int i = start +1 ; i < s.length() ; i++) {
             if(s.substring(i,i+1).equals(quote.substring(1,2))){
                 return i;
             }
