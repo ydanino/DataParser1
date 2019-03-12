@@ -23,10 +23,12 @@ public class Main {
         //test of utils
 
         String data = Utils.readFileAsString("data/2016_Presidential_Results.csv");
-        System.out.println(data);
+
 
         ArrayList<ElectionResult> results = Utils.parse2016ElectionResults(data);
-//         objs which splits everything well,
+        for (int i = 0; i < results.size(); i++) {
+            results.get(i).toString();
+        }
 
 
     }
