@@ -26,8 +26,9 @@ public class Main {
 
 
         ArrayList<unemployed> results = Utils.parseUnemployment(data);
+        System.out.println(results.size());
         for (int i = 0; i < results.size(); i++) {
-            results.get(i).toString();
+            System.out.println(results.get(i).toString());
         }
 
 
